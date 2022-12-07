@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  qas_eval:
+    build: .
+    privileged: true
+    environment:
+      - MODEL=CSEM3D_S
+      - PATH_MODEL=code
+    command: ./monan/tools/qas_eval/run_eval.sh
+    volumes:
+     # comente a linha abaixo para rodar os exemplos
+     - ${PWD}/run_eval.sh:/home/qas_eval/monan/tools/qas_eval/run_eval.sh
+     - ${PWD}/qas_out:/home/qas_eval/qas_out
+     # altere o caminhho antes de ":" para o diretório do código
+     - ${PWD}/../invmultifis/CSEM3D_S:/home/qas_eval/code
+    
